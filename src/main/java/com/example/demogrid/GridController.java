@@ -1,40 +1,51 @@
 package com.example.demogrid;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
 public class GridController {
-
-    @FXML
-    private final GridView gridView;
-
-    private final GridModel gridModel;
-    @FXML
-    private TextField indexField;
-
-    @FXML
-    private TextField valueField;
-
-    @FXML
-    private Button updateButton;
+    private final GridModel model;
+    private final GridView view;
 
     public GridController(GridModel model, GridView view) {
-        this.gridModel = model;
-        this.gridView = view;
+        this.model = model;
+        this.view = view;
+
+        // Add the listener to update the sums whenever a text field changes
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                TextField textField = view.getTextFields()[row][col];
+                int finalRow = row;
+                int finalCol = col;
+                textField.textProperty().addListener(new ChangeListener<String>() {
+                    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                        int value = 0;
+                        try {
+                            value = Integer.parseInt(newValue);
+                        } catch (NumberFormatException e) {
+                            value = 0;
+                        }
+                        model.setValue(finalRow, finalCol, value);
+                        updateSums();
+                    }
+                });
+            }
+        }
     }
 
-    @FXML
-    public void initialize() {
-        gridView.update(gridModel);
-    }
+    private void updateSums() {
+        // Update the row sums
+        for (int row = 0; row < 3; row++) {
+            int sum = model.getRowSum(row);
+            // boolean checksuma
+            view.getRowSumFields()[row].setText(Integer.toString(sum)); // accede al array del getter del view
+        }
 
-    @FXML
-    public void handleUpdate(ActionEvent event) {
-        int index = Integer.parseInt(indexField.getText());
-        int value = Integer.parseInt(valueField.getText());
-        gridModel.setValue(index, value);
-        gridView.update(gridModel);
+        // Update the column sums
+        for (int col = 0; col < 3; col++) {
+            int sum = model.getColumnSum(col);
+            view.getColumnSumFields()[col].setText(Integer.toString(sum)); // accede al array del getter del view
+        }
     }
 }

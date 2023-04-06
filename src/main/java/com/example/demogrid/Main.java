@@ -5,15 +5,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    @Override
     public void start(Stage primaryStage) {
-        int [] array = {1,2,3};
-        GridModel model = new GridModel(array);
+        GridModel model = new GridModel();
         GridView view = new GridView();
-        GridController controller = new GridController(model, view);
+        new GridController(model, view);
 
-        Scene scene = new Scene(view, 400, 400);
-        primaryStage.setTitle("Demo Grid");
+        Scene scene = new Scene(view.getGrid(), 400, 400);
+        primaryStage.setTitle("Grid Example");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

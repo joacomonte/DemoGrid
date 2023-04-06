@@ -1,30 +1,33 @@
 package com.example.demogrid;
 
-// Model
-
 public class GridModel {
-    private final int[] values;
+    private final int[][] grid;
 
-    public GridModel(int[] values) {
-        this.values = values;
+    public GridModel() {
+        grid = new int[3][3];
     }
 
-    public int getValue(int index) {
-        return values[index];
+    public void setValue(int row, int col, int value) {
+        grid[row][col] = value;
     }
 
-    public void setValue(int index, int value) {
-        values[index] = value;
-    }
+//    public int getValue(int row, int col) {
+//        return grid[row][col];
+//    }
 
-    public int getSum() {
+    public int getRowSum(int row) {
         int sum = 0;
-        for (int value : values) {
-            sum += value;
+        for (int col = 0; col < 3; col++) {
+            sum += grid[row][col];
+        }
+        return sum;
+    }
+
+    public int getColumnSum(int col) {
+        int sum = 0;
+        for (int row = 0; row < 3; row++) {
+            sum += grid[row][col];
         }
         return sum;
     }
 }
-
-
-
