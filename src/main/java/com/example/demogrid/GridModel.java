@@ -5,10 +5,11 @@ public class GridModel {
     private final int numberOfCells = 4;
     private final int[][] grid;
 
-    private int[][] expectedNumbers;
+    public int[][] expectedNumbers;
 
     public GridModel() {
         grid = new int[numberOfCells][numberOfCells];
+        expectedNumbers = new int[numberOfCells/2][numberOfCells];
     }
 
     public void setValue(int row, int col, int value) {
@@ -19,7 +20,8 @@ public class GridModel {
         //initialice list for the desired numbers, it's a 2x4 "grid"
         // expectedNumbers[0][ROW]   and   expectedNumbers[1][COLUMN]
         int[][] expectedNumbers = new int[numberOfCells/2][numberOfCells];
-        //TODO Generate the numbers, must follow some math rules. not an easy task
+        //TODO Generate the numbers, must follow some math rules
+        //TODO esta logica va a ser medio complicada
         return expectedNumbers;
     }
 
@@ -31,6 +33,11 @@ public class GridModel {
 //    public int getValue(int row, int col) {
 //        return grid[row][col];
 //    }
+
+    public void generateDesiredNumbers() {
+        //TODO just using this next line to test
+        expectedNumbers = new int[][]{{2, 2, 2, 2}, {9, 9, 9, 9}};
+    }
 
 
 
@@ -54,7 +61,17 @@ public class GridModel {
         return expectedNumbers[0][row];
     }
 
+    public int getColumnDesireNumber(int col) {
+        return expectedNumbers[1][col];
+    }
+
     public boolean isRowSumAchieved(int sum, int desiredSum) {
         return (sum == desiredSum);
     }
+
+    public boolean isColSumAchieved(int sum, int desiredSum) {
+        return (sum == desiredSum);
+    }
+
+
 }

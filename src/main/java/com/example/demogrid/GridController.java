@@ -29,7 +29,7 @@ public class GridController {
                             value = 0;
                         }
                         model.setValue(finalRow, finalCol, value);
-                        updateSums();
+                        setDesiredNumberCell();
                         checkWinCondition();
                     }
                 });
@@ -38,18 +38,50 @@ public class GridController {
     }
 
     private void checkWinCondition() {
-        //TODO check sum of each colum and row, part of this must be done by model
         //gets the sum of row, and the desired rowSum. then probably needs to be compared from model
+        boolean allRowSumAchieved = allRowSumAchieved();
+        boolean allColumnSumAchieved = allColumnSumAchieved();
+        if(allColumnSumAchieved==allRowSumAchieved){
+            //TODO WIN!
+        }
+
+    }
+
+    //check if all the column sums are OK.
+    private boolean allColumnSumAchieved() {
+        boolean sumAcumulator = false;
+        for (int col = 0; col < numberOfCells; col++) {
+            int sum = model.getRowSum(col);
+            int desiredSum = model.getColumnDesireNumber(col);
+            boolean rowSumAchieved = model.isColSumAchieved(sum, desiredSum);
+            sumAcumulator = sumAcumulator || rowSumAchieved;
+        }
+        return sumAcumulator;
+    }
+
+    //check if all the row sums are OK.
+    private boolean allRowSumAchieved() {
+        boolean sumAcumulator = false;
         for (int row = 0; row < numberOfCells; row++) {
             int sum = model.getRowSum(row);
             int desiredSum = model.getRowDesireNumber(row);
             boolean rowSumAchieved = model.isRowSumAchieved(sum, desiredSum);
-            if(rowSumAchieved){
-                //change rowSumColor, and keep going. Need an accumulator to checkwin?
-            }
+            sumAcumulator = sumAcumulator || rowSumAchieved;
         }
+        return sumAcumulator;
     }
 
+    private void setDesiredNumberCell(){
+        for (int row = 0; row < numberOfCells; row++){
+            int desiredNumber = model.getRowDesireNumber(row);
+            view.getRowSumFields()[row].setText(Integer.toString(desiredNumber));
+        }
+        for (int col = 0; col < numberOfCells; col++){
+            int desiredNumber = model.getColumnDesireNumber(col);
+            view.getColumnSumFields()[col].setText(Integer.toString(desiredNumber));
+        }
+    }
+    //this method is probably gone
     private void updateSums() {
         // Update the row sums
         for (int row = 0; row < numberOfCells; row++) {
