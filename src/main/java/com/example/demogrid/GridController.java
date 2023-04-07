@@ -30,8 +30,22 @@ public class GridController {
                         }
                         model.setValue(finalRow, finalCol, value);
                         updateSums();
+                        checkWinCondition();
                     }
                 });
+            }
+        }
+    }
+
+    private void checkWinCondition() {
+        //TODO check sum of each colum and row, part of this must be done by model
+        //gets the sum of row, and the desired rowSum. then probably needs to be compared from model
+        for (int row = 0; row < numberOfCells; row++) {
+            int sum = model.getRowSum(row);
+            int desiredSum = model.getRowDesireNumber(row);
+            boolean rowSumAchieved = model.isRowSumAchieved(sum, desiredSum);
+            if(rowSumAchieved){
+                //change rowSumColor, and keep going. Need an accumulator to checkwin?
             }
         }
     }
@@ -40,7 +54,7 @@ public class GridController {
         // Update the row sums
         for (int row = 0; row < numberOfCells; row++) {
             int sum = model.getRowSum(row);
-            // boolean checksuma
+            // boolean checksum
             view.getRowSumFields()[row].setText(Integer.toString(sum)); // accede al array del getter del view
         }
 
