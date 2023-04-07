@@ -16,6 +16,10 @@ public class GridModel {
 
     public void setValue(int row, int col, int value) {
         grid[row][col] = value;
+        System.out.println("At posicion: "+ row + "," + col + ". The value is: " + value);
+        System.out.println("Row sums: " + getRowSum(row));
+        System.out.println("Column sums: "+ getColumnSum(col));
+        System.out.println("\n");
     }
 
     public int getRowSum(int row) {
@@ -30,6 +34,7 @@ public class GridModel {
         int sum = 0;
         for (int row = 0; row < gridSize; row++) {
             sum += grid[row][col];
+//            System.out.println("Value at row " + row + ", col " + col + ": " + grid[row][col] + ", sum: " + sum);
         }
         return sum;
     }
