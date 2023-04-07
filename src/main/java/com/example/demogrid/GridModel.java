@@ -20,6 +20,9 @@ public class GridModel {
         System.out.println("Row sums: " + getRowSum(row));
         System.out.println("Column sums: "+ getColumnSum(col));
         System.out.println("\n");
+        System.out.println("expected row sum is: " + expectedNumbers[0][row]);
+        System.out.println("expected col sum is: " + expectedNumbers[1][col]);
+
     }
 
     public int getRowSum(int row) {
@@ -74,6 +77,7 @@ public class GridModel {
                 matriz[i][j] = rand.nextInt(10);
             }
         }
+        imprimirMatriz(matriz);
         return matriz;
     }
 

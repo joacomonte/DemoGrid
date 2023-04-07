@@ -29,7 +29,7 @@ public class GridController {
                             // ignore invalid input
                         }
                         model.setValue(finalRow, finalCol, value);
-                        checkWinCondition();
+                        checkWinConditionAndPaint();
                     }
                 });
             }
@@ -38,18 +38,33 @@ public class GridController {
         setExpectedSumsIntoGrid();
     }
 
-    private void checkWinCondition() {
-        //gets the sum of row, and the desired rowSum. then probably needs to be compared from model
-        boolean allRowSumAchieved = allRowSumAchieved();
-        boolean allColumnSumAchieved = allColumnSumAchieved();
-        if(allColumnSumAchieved==allRowSumAchieved){
-            //TODO WIN!
+    private void checkWinConditionAndPaint() {
+        boolean rowsOk = checkAllRowsSumExpectedResult();
+        boolean colsOk = checkAllColumnsSumExpectedResult();
+
+        // paint cells based on the condition
+        for (int row = 0; row < gridSize; row++) {
+            for (int col = 0; col < gridSize; col++) {
+                TextField textField = view.getTextFields()[row][col];
+                if (rowsOk && model.getRowSum(row) == model.getRowDesireNumber(row)) {
+                    textField.setStyle("-fx-background-color: #90ee90;"); // set background color to light green
+                } else if (colsOk && model.getColumnSum(col) == model.getColumnDesireNumber(col)) {
+                    textField.setStyle("-fx-background-color: #90ee90;"); // set background color to light green
+                } else {
+                    textField.setStyle(""); // set background color to white
+                }
+            }
         }
 
+        // check if all the row sums and column sums are achieved and print a message if so
+        if (rowsOk && colsOk) {
+            System.out.println("Congratulations, you've won!");
+        }
     }
 
+
     //check if all the column sums are OK.
-    private boolean allColumnSumAchieved() {
+    private boolean checkAllColumnsSumExpectedResult() {
         boolean sumAcumulator = false;
         for (int col = 0; col < gridSize; col++) {
             int sum = model.getRowSum(col);
@@ -61,7 +76,7 @@ public class GridController {
     }
 
     //check if all the row sums are OK.
-    private boolean allRowSumAchieved() {
+    private boolean checkAllRowsSumExpectedResult() {
         boolean sumAcumulator = false;
         for (int row = 0; row < gridSize; row++) {
             int sum = model.getRowSum(row);
