@@ -38,6 +38,8 @@ public class GridView {
             for (int col = 0; col < numberOfCells; col++) { //loop Columnas
                 TextField textField = new TextField(); // Crear un nuevo objeto TextField para la celda actual
                 textField.setAlignment(Pos.CENTER); // Alinear el texto en el centro del campo de texto
+                textField.setPrefWidth(60); // Set the preferred width of the text field to 50 pixels
+                textField.setPrefHeight(60); // Set the preferred height of the text field to 50 pixels
                 textFields[row][col] = textField; // Asignar el objeto TextField a la matriz en la posición actual
                 grid.add(textField, col, row); // Agregar el objeto TextField al GridPane en la posición actual
             }
@@ -50,7 +52,10 @@ public class GridView {
         for (int row = 0; row < numberOfCells; row++) {
             TextField textField = new TextField();
             textField.setEditable(false);
+            textField.setStyle("-fx-background-color: #DDE1E6;");// set background color to light grey
             textField.setAlignment(Pos.CENTER);
+            textField.setPrefWidth(60); // Set the preferred width of the text field to 50 pixels
+            textField.setPrefHeight(60); // Set the preferred height of the text field to 50 pixels
             rowSumFields[row] = textField;
             grid.add(textField, numberOfCells, row);
         }
@@ -60,7 +65,10 @@ public class GridView {
         for (int col = 0; col < numberOfCells; col++) {
             TextField textField = new TextField();
             textField.setEditable(false);
+            textField.setStyle("-fx-background-color: #DDE1E6;"); // set background color to light grey
             textField.setAlignment(Pos.CENTER);
+            textField.setPrefWidth(60); // Set the preferred width of the text field to 50 pixels
+            textField.setPrefHeight(60); // Set the preferred height of the text field to 50 pixels
             columnSumFields[col] = textField;
             grid.add(textField, col, numberOfCells);
         }
