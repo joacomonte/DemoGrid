@@ -4,14 +4,14 @@ import java.util.Random;
 
 public class GridModel {
 
-    private final int numberOfCells = 4;
+    private final int gridSize = 4;
     private final int[][] grid;
 
     public int[][] expectedNumbers;
 
     public GridModel() {
-        grid = new int[numberOfCells][numberOfCells];
-        expectedNumbers = new int[numberOfCells/2][numberOfCells];
+        grid = new int[gridSize][gridSize];
+        expectedNumbers = new int[gridSize /2][gridSize];
     }
 
     public void setValue(int row, int col, int value) {
@@ -20,7 +20,7 @@ public class GridModel {
 
     public int getRowSum(int row) {
         int sum = 0;
-        for (int col = 0; col < numberOfCells; col++) {
+        for (int col = 0; col < gridSize; col++) {
             sum += grid[row][col];
         }
         return sum;
@@ -28,16 +28,17 @@ public class GridModel {
 
     public int getColumnSum(int col) {
         int sum = 0;
-        for (int row = 0; row < numberOfCells; row++) {
+        for (int row = 0; row < gridSize; row++) {
             sum += grid[row][col];
         }
         return sum;
     }
 
+    // generates and sets the result row and col sums
     public void generateRandomResults(){
-        int[][] matrizRandom = generarMatrizRandom();
-        expectedNumbers[0]=obtenerSumaFilas(matrizRandom);
-        expectedNumbers[1]=obtenerSumaColumnas(matrizRandom);
+        int[][] randomMatrix = generateRandomMatrix();
+        expectedNumbers[0]= getRowsSumFromMatrix(randomMatrix);
+        expectedNumbers[1]= getColsSumFromMatrix(randomMatrix);
     }
 
     public int getRowDesireNumber(int row) {
@@ -60,7 +61,7 @@ public class GridModel {
     //AUXILIARES
 
     // Generates random matrix
-    public static int[][] generarMatrizRandom() {
+    public static int[][] generateRandomMatrix() {
         int[][] matriz = new int[4][4];
         Random rand = new Random();
         for (int i = 0; i < 4; i++) {
@@ -71,8 +72,8 @@ public class GridModel {
         return matriz;
     }
 
-    // Retorns array of sum of rows
-    public static int[] obtenerSumaFilas(int[][] matriz) {
+    // Returns array of sum of rows
+    public static int[] getRowsSumFromMatrix(int[][] matriz) {
         int[] sumaFilas = new int[4];
         for (int i = 0; i < 4; i++) {
             int sumaFila = 0;
@@ -85,7 +86,7 @@ public class GridModel {
     }
 
     // Returns array of sum of columns
-    public static int[] obtenerSumaColumnas(int[][] matriz) {
+    public static int[] getColsSumFromMatrix(int[][] matriz) {
         int[] sumaColumnas = new int[4];
         for (int j = 0; j < 4; j++) {
             int sumaColumna = 0;
