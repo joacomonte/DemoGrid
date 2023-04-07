@@ -81,18 +81,19 @@ public class GridController {
             view.getColumnSumFields()[col].setText(Integer.toString(desiredNumber));
         }
     }
-    //this method is probably gone
+    //this method is probably deprecated
     private void updateSums() {
         // Update the row sums
         for (int row = 0; row < numberOfCells; row++) {
-            int sum = model.getRowSum(row);
+            int sum = model.getRowDesireNumber(row);
+
             // boolean checksum
             view.getRowSumFields()[row].setText(Integer.toString(sum)); // accede al array del getter del view
         }
 
         // Update the column sums
         for (int col = 0; col < numberOfCells; col++) {
-            int sum = model.getColumnSum(col);
+            int sum = model.getColumnDesireNumber(col);
             view.getColumnSumFields()[col].setText(Integer.toString(sum)); // accede al array del getter del view
         }
     }
