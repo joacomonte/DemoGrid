@@ -1,10 +1,12 @@
 package com.example.demogrid;
 
 public class GridModel {
+
+    private final int numberOfCells = 4;
     private final int[][] grid;
 
     public GridModel() {
-        grid = new int[3][3];
+        grid = new int[numberOfCells][numberOfCells];
     }
 
     public void setValue(int row, int col, int value) {
@@ -17,7 +19,7 @@ public class GridModel {
 
     public int getRowSum(int row) {
         int sum = 0;
-        for (int col = 0; col < 3; col++) {
+        for (int col = 0; col < numberOfCells; col++) {
             sum += grid[row][col];
         }
         return sum;
@@ -25,7 +27,7 @@ public class GridModel {
 
     public int getColumnSum(int col) {
         int sum = 0;
-        for (int row = 0; row < 3; row++) {
+        for (int row = 0; row < numberOfCells; row++) {
             sum += grid[row][col];
         }
         return sum;

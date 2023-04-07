@@ -8,6 +8,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 public class GridView {
+
+    private final int numberOfCells = 4;
     private final GridPane grid;
     private final TextField[][] textFields;
     private final TextField[] rowSumFields;
@@ -33,9 +35,9 @@ public class GridView {
 
 
 
-        textFields = new TextField[3][3]; // Crear una matriz de objetos TextField de 3x3
-        for (int row = 0; row < 3; row++) { // loop filas
-            for (int col = 0; col < 3; col++) { //loop Columnas
+        textFields = new TextField[numberOfCells][numberOfCells]; // Crear una matriz de objetos TextField de 3x3
+        for (int row = 0; row < numberOfCells; row++) { // loop filas
+            for (int col = 0; col < numberOfCells; col++) { //loop Columnas
                 TextField textField = new TextField(); // Crear un nuevo objeto TextField para la celda actual
                 textField.setAlignment(Pos.CENTER); // Alinear el texto en el centro del campo de texto
                 textFields[row][col] = textField; // Asignar el objeto TextField a la matriz en la posición actual
@@ -45,23 +47,23 @@ public class GridView {
 
 
         // Create the text fields for the row sums
-        rowSumFields = new TextField[3];
-        for (int row = 0; row < 3; row++) {
+        rowSumFields = new TextField[numberOfCells];
+        for (int row = 0; row < numberOfCells; row++) {
             TextField textField = new TextField();
             textField.setEditable(false);
             textField.setAlignment(Pos.CENTER);
             rowSumFields[row] = textField;
-            grid.add(textField, 3, row);
+            grid.add(textField, numberOfCells, row);
         }
 
         // Create the text fields for the column sums
-        columnSumFields = new TextField[3];
-        for (int col = 0; col < 3; col++) {
+        columnSumFields = new TextField[numberOfCells];
+        for (int col = 0; col < numberOfCells; col++) {
             TextField textField = new TextField();
             textField.setEditable(false);
             textField.setAlignment(Pos.CENTER);
             columnSumFields[col] = textField;
-            grid.add(textField, col, 3);
+            grid.add(textField, col, numberOfCells);
         }
     }
 

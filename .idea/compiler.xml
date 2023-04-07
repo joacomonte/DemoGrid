@@ -9,8 +9,5 @@
         <module name="DemoGrid" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="DemoGrid" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

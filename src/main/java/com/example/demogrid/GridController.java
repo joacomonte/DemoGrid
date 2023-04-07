@@ -5,6 +5,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
 public class GridController {
+
+    private final int numberOfCells = 4;
     private final GridModel model;
     private final GridView view;
 
@@ -13,8 +15,8 @@ public class GridController {
         this.view = view;
 
         // Add the listener to update the sums whenever a text field changes
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
+        for (int row = 0; row < numberOfCells; row++) {
+            for (int col = 0; col < numberOfCells; col++) {
                 TextField textField = view.getTextFields()[row][col];
                 int finalRow = row;
                 int finalCol = col;
@@ -36,14 +38,14 @@ public class GridController {
 
     private void updateSums() {
         // Update the row sums
-        for (int row = 0; row < 3; row++) {
+        for (int row = 0; row < numberOfCells; row++) {
             int sum = model.getRowSum(row);
             // boolean checksuma
             view.getRowSumFields()[row].setText(Integer.toString(sum)); // accede al array del getter del view
         }
 
         // Update the column sums
-        for (int col = 0; col < 3; col++) {
+        for (int col = 0; col < numberOfCells; col++) {
             int sum = model.getColumnSum(col);
             view.getColumnSumFields()[col].setText(Integer.toString(sum)); // accede al array del getter del view
         }
