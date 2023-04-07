@@ -35,6 +35,8 @@ public class GridController {
                 });
             }
         }
+        // it prints desired sums at first render
+        setDesiredNumberCell();
     }
 
     private void checkWinCondition() {
