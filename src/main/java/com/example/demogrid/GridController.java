@@ -2,6 +2,7 @@ package com.example.demogrid;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 public class GridController {
@@ -46,9 +47,9 @@ public class GridController {
         for (int row = 0; row < gridSize; row++) {
             for (int col = 0; col < gridSize; col++) {
                 TextField textField = view.getTextFields()[row][col];
-                if (rowsOk && model.getRowSum(row) == model.getRowDesireNumber(row)) {
+                if (model.getRowSum(row) == model.getRowDesireNumber(row)) {
                     textField.setStyle("-fx-background-color: #90ee90;"); // set background color to light green
-                } else if (colsOk && model.getColumnSum(col) == model.getColumnDesireNumber(col)) {
+                } else if (model.getColumnSum(col) == model.getColumnDesireNumber(col)) {
                     textField.setStyle("-fx-background-color: #90ee90;"); // set background color to light green
                 } else {
                     textField.setStyle(""); // set background color to white
@@ -57,8 +58,12 @@ public class GridController {
         }
 
         // check if all the row sums and column sums are achieved and print a message if so
-        if (rowsOk && colsOk) {
-            System.out.println("Congratulations, you've won!");
+        if (rowsOk && colsOk && checkAllRowsSumExpectedResult() && checkAllColumnsSumExpectedResult()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Congratulations");
+            alert.setHeaderText("You've won!");
+            alert.setContentText("Congratulations, you've successfully completed the game!");
+            alert.showAndWait();
         }
     }
 
