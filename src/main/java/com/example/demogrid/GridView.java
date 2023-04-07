@@ -2,10 +2,8 @@ package com.example.demogrid;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 
 public class GridView {
 
@@ -34,8 +32,8 @@ public class GridView {
 
 
 
-
-        textFields = new TextField[numberOfCells][numberOfCells]; // Crear una matriz de objetos TextField de 3x3
+        // Crear una matriz de objetos TextField de 3x3
+        textFields = new TextField[numberOfCells][numberOfCells];
         for (int row = 0; row < numberOfCells; row++) { // loop filas
             for (int col = 0; col < numberOfCells; col++) { //loop Columnas
                 TextField textField = new TextField(); // Crear un nuevo objeto TextField para la celda actual
@@ -44,6 +42,7 @@ public class GridView {
                 grid.add(textField, col, row); // Agregar el objeto TextField al GridPane en la posición actual
             }
         }
+
 
 
         // Create the text fields for the row sums
