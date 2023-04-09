@@ -1,9 +1,16 @@
 package com.example.demogrid;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public class GridController {
 
@@ -60,37 +67,38 @@ public class GridController {
         // check if all the row sums and column sums are achieved and print a message if so
         if (rowsOk && colsOk && checkAllRowsSumExpectedResult() && checkAllColumnsSumExpectedResult()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Congratulations");
-            alert.setHeaderText("You've won!");
-            alert.setContentText("Congratulations, you've successfully completed the game!");
-            alert.showAndWait();
+            alert.setTitle("FELICITACIONES");
+            alert.setHeaderText("GANASTE :D");
+            alert.setContentText("Aprieta Ok para reiniciar el juego ");
+            Optional<ButtonType> result = alert.showAndWait();
         }
     }
 
 
-    //check if all the column sums are OK.
+
     private boolean checkAllColumnsSumExpectedResult() {
-        boolean sumAcumulator = false;
+        boolean sumAcumulator = true; // initialize with true
         for (int col = 0; col < gridSize; col++) {
-            int sum = model.getRowSum(col);
+            int sum = model.getColumnSum(col); // use getColumnSum() method here
             int desiredSum = model.getColumnDesireNumber(col);
-            boolean rowSumAchieved = model.isColSumAchieved(sum, desiredSum);
-            sumAcumulator = sumAcumulator || rowSumAchieved;
+            boolean colSumAchieved = model.isColSumAchieved(sum, desiredSum);
+            sumAcumulator = sumAcumulator && colSumAchieved; // use && operator here
         }
         return sumAcumulator;
     }
 
-    //check if all the row sums are OK.
     private boolean checkAllRowsSumExpectedResult() {
-        boolean sumAcumulator = false;
+        boolean sumAcumulator = true; // initialize with true
         for (int row = 0; row < gridSize; row++) {
             int sum = model.getRowSum(row);
             int desiredSum = model.getRowDesireNumber(row);
             boolean rowSumAchieved = model.isRowSumAchieved(sum, desiredSum);
-            sumAcumulator = sumAcumulator || rowSumAchieved;
+            sumAcumulator = sumAcumulator && rowSumAchieved; // use && operator here
         }
         return sumAcumulator;
     }
+
+
 
     private void setExpectedSumsIntoGrid(){
         for (int row = 0; row < gridSize; row++){
