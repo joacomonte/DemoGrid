@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public void start(Stage primaryStage) {
+        //Creating model, randomNumbers, view and controller
         GridModel model = new GridModel();
         model.generateRandomResults();
         GridView view = new GridView();

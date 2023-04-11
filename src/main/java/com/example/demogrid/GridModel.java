@@ -69,7 +69,7 @@ public class GridModel {
     //AUXILIARES
 
     // Generates random matrix
-    public static int[][] generateRandomMatrix() {
+    private static int[][] generateRandomMatrix() {
         int[][] matriz = new int[4][4];
         Random rand = new Random();
         for (int i = 0; i < 4; i++) {
@@ -82,7 +82,7 @@ public class GridModel {
     }
 
     // Returns array of sum of rows
-    public static int[] getRowsSumFromMatrix(int[][] matriz) {
+    private static int[] getRowsSumFromMatrix(int[][] matriz) {
         int[] sumaFilas = new int[4];
         for (int i = 0; i < 4; i++) {
             int sumaFila = 0;
@@ -95,7 +95,7 @@ public class GridModel {
     }
 
     // Returns array of sum of columns
-    public static int[] getColsSumFromMatrix(int[][] matriz) {
+    private static int[] getColsSumFromMatrix(int[][] matriz) {
         int[] sumaColumnas = new int[4];
         for (int j = 0; j < 4; j++) {
             int sumaColumna = 0;
