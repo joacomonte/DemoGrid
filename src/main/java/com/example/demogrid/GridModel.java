@@ -74,7 +74,7 @@ public class GridModel {
         Random rand = new Random();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                matriz[i][j] = rand.nextInt(10);
+                matriz[i][j] = rand.nextInt(1,10);
             }
         }
         imprimirMatriz(matriz);
